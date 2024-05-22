@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:managerapp/Widgets/textSeparator.dart';
 import 'package:provider/provider.dart';
 
@@ -6,6 +7,7 @@ import '../routes/router.dart';
 import '../services/navigationService.dart';
 import '../services/sideMenuProvide.dart';
 import 'menuItems.dart';
+import 'menuItemsSgv.dart';
 
 class Siderbar extends StatelessWidget {
   const Siderbar({super.key});
@@ -52,9 +54,11 @@ class Siderbar extends StatelessWidget {
                     sideMenuProvider.currentPage == Flurorouter.clientesRoute,
               ),
               const TextSeparator(text: 'Procedimientos'),
-              MenuItems(
+              MenuItemsSgv(
                 text: 'Procedimientos',
-                icon: Icons.inventory_outlined,
+                icon: SvgPicture.asset(
+                  'img/bisturi.svg',
+                ),
                 onPressd: () => _navigateTo(Flurorouter.procedimientosRoute),
                 isActive: sideMenuProvider.currentPage ==
                     Flurorouter.procedimientosRoute,
