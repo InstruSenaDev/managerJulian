@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 
-class PedidosView extends StatelessWidget {
-  const PedidosView({super.key});
+class ForosPages extends StatelessWidget {
+  const ForosPages({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
     return Container(
       // color: Colors.red,
       child: const Center(
         child: Text(
-          'pedidos',
-          style: TextStyle(color: Colors.white),
+          'ForosPages',
+          style: TextStyle(color: Colors.black),
         ),
       ),
     );

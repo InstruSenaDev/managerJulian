@@ -1,6 +1,8 @@
 import 'package:fluro/fluro.dart';
+import 'package:managerapp/iu/views/Centros/CentrosView.dart';
 import 'package:managerapp/iu/views/Clientes/ClientesView.dart';
-import 'package:managerapp/iu/views/Pedidos/PedidosView.dart';
+import 'package:managerapp/iu/views/Foros/ForosView.dart';
+import 'package:managerapp/iu/views/Recomendaciones/RecomendacionesView.dart';
 import 'package:managerapp/iu/views/Procedimientos/ProcedimientosView.dart';
 import 'package:managerapp/iu/views/Usuarios/UsuarioView.dart';
 import 'package:provider/provider.dart';
@@ -60,18 +62,6 @@ class AdminHandlers {
     }
   });
 
-  static Handler pedidosRoute = Handler(handlerFunc: (context, params) {
-    final authProvider = Provider.of<AuthProvider>(context!);
-    Provider.of<SideMenuProvider>(context, listen: false)
-        .setCurrentPageUrl(Flurorouter.pedidosRoute);
-
-    if (authProvider.authStatus == AuthStatus.authenticated) {
-      return const PedidosView();
-    } else {
-      return const LoginView();
-    }
-  });
-
   static Handler procedimientosRoute = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
     Provider.of<SideMenuProvider>(context, listen: false)
@@ -83,16 +73,53 @@ class AdminHandlers {
       return const LoginView();
     }
   });
+  static Handler recomendacionesRoute = Handler(handlerFunc: (context, params) {
+    //forosRoute
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.recomendacionesRoute);
 
-  // static Handler tienda = Handler(handlerFunc: (context, params) {
-  //   final authProvider = Provider.of<AuthProvider>(context!);
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return const RecomendacionesPages();
+    } else {
+      return const LoginView();
+    }
+  });
 
-  //   if (authProvider.authStatus == AuthStatus.tienda)
-  //     return TiendaView();
-  //   // return CarritoView();
-  //   else
-  //     return LoginView();
-  // });
+  static Handler forosRoute = Handler(handlerFunc: (context, params) {
+    //forosRoute
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.forosRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return const ForosPages();
+    } else {
+      return const LoginView();
+    }
+  });
+
+  static Handler centrosRoute = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.centrosRoute);
+    if (authProvider.authStatus == AuthStatus.authenticated)
+      return CentrosPages();
+    // return CarritoView();
+    else
+      return LoginView();
+  });
+
+  static Handler ubicacionesRoute = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.ubicacionesRoute);
+    if (authProvider.authStatus == AuthStatus.authenticated)
+      return CentrosPages();
+    // return CarritoView();
+    else
+      return LoginView();
+  });
 
   // static Handler tiendaCarrito = Handler(handlerFunc: (context, params) {
   //   final authProvider = Provider.of<AuthProvider>(context!);

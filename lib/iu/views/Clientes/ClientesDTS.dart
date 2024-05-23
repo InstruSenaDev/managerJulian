@@ -3,9 +3,7 @@ import 'package:managerapp/Provider/Clientes/ClientesProvider.dart';
 
 import 'package:managerapp/modelo/Usuarios/UsuariosModels.dart';
 
-import 'package:provider/provider.dart';
 
-import '../../../Provider/Usuarios/UsuarioProvider.dart';
 
 class ClienteDTS extends DataTableSource {
   final List<Usuario> usuarios;

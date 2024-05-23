@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-
 import 'package:managerapp/modelo/Usuarios/UsuariosModels.dart';
-
-import 'package:provider/provider.dart';
 
 import '../../../Provider/Usuarios/UsuarioProvider.dart';
 
@@ -16,7 +13,7 @@ class UsuariosDTS extends DataTableSource {
   @override
   DataRow getRow(int index) {
     final usuario = usuarios[index];
-    final vende = Provider.of<UsuariosProvider>(context);
+    // final vende = Provider.of<UsuariosProvider>(context);
     return DataRow.byIndex(index: index, cells: [
       DataCell(Text('${usuario.nombres!} ${usuario.apellidos}')),
       DataCell(Text(usuario.documento!)),

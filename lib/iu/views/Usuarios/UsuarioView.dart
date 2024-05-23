@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,7 +25,6 @@ class _UsuarioViewState extends State<UsuarioView> {
   @override
   Widget build(BuildContext context) {
     final usuarios = Provider.of<UsuariosProvider>(context);
-    int _rowsPerPage = PaginatedDataTable.defaultRowsPerPage;
     final size = MediaQuery.of(context).size;
     return Container(
       // color: Colors.red,
@@ -37,7 +35,7 @@ class _UsuarioViewState extends State<UsuarioView> {
         ),
         child: (usuarios.usuarios.isEmpty)
             ? SpinKitThreeBounce(
-                color: Color(0xffd35400),
+                color: Color(0xffC81966),
                 size: 50.0,
               )
             : ListView(

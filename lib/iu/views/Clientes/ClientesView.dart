@@ -1,13 +1,10 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:managerapp/Provider/Clientes/ClientesProvider.dart';
 import 'package:managerapp/iu/views/Clientes/ClientesDTS.dart';
-import 'package:managerapp/iu/views/Usuarios/UsuariosDTS.dart';
 import 'package:provider/provider.dart';
 
-import '../../../Provider/Usuarios/UsuarioProvider.dart';
 import '../../../inputs/customIconButton.dart';
 
 class ClientesView extends StatefulWidget {
@@ -28,7 +25,7 @@ class _ClientesViewState extends State<ClientesView> {
   @override
   Widget build(BuildContext context) {
     final usuarios = Provider.of<ClienteProvider>(context);
-    int _rowsPerPage = PaginatedDataTable.defaultRowsPerPage;
+    // int _rowsPerPage = PaginatedDataTable.defaultRowsPerPage;
     final size = MediaQuery.of(context).size;
     return Container(
       // color: Colors.red,
@@ -39,7 +36,7 @@ class _ClientesViewState extends State<ClientesView> {
         ),
         child: (usuarios.usuarios.isEmpty)
             ? SpinKitThreeBounce(
-                color: Color(0xffd35400),
+                color: Color(0xffC81966),
                 size: 50.0,
               )
             : ListView(
@@ -128,5 +125,8 @@ class _ClientesViewState extends State<ClientesView> {
               ),
       ),
     );
+  
+  
+  
   }
 }

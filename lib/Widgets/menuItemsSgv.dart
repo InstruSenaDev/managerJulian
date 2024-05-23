@@ -47,7 +47,11 @@ class _MenuItemsSgvState extends State<MenuItemsSgv> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   // Icon(widget.icon, color: Colors.white.withOpacity(0.3)),
-                  widget.icon,
+                  Container(
+                    width: 25,
+                    height: 25,
+                    child: widget.icon,
+                  ),
                   SizedBox(
                     width: 10,
                   ),

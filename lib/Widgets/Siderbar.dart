@@ -53,22 +53,55 @@ class Siderbar extends StatelessWidget {
                 isActive:
                     sideMenuProvider.currentPage == Flurorouter.clientesRoute,
               ),
+              SizedBox(
+                height: 10,
+              ),
               const TextSeparator(text: 'Procedimientos'),
               MenuItemsSgv(
                 text: 'Procedimientos',
                 icon: SvgPicture.asset(
                   'img/bisturi.svg',
+                  color: Colors.white.withOpacity(0.2),
                 ),
                 onPressd: () => _navigateTo(Flurorouter.procedimientosRoute),
                 isActive: sideMenuProvider.currentPage ==
                     Flurorouter.procedimientosRoute,
               ),
               MenuItems(
-                text: 'Pedidos',
-                icon: Icons.newspaper_outlined,
-                onPressd: () => _navigateTo(Flurorouter.pedidosRoute),
+                text: 'Recomendaciones',
+                icon: Icons.fact_check_outlined,
+                onPressd: () => _navigateTo(Flurorouter.recomendacionesRoute),
+                isActive: sideMenuProvider.currentPage ==
+                    Flurorouter.recomendacionesRoute,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              const TextSeparator(text: 'Social'),
+              MenuItems(
+                text: 'Foros',
+                icon: Icons.forum_outlined,
+                onPressd: () => _navigateTo(Flurorouter.forosRoute),
                 isActive:
-                    sideMenuProvider.currentPage == Flurorouter.pedidosRoute,
+                    sideMenuProvider.currentPage == Flurorouter.forosRoute,
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              const TextSeparator(text: 'Configuraciónes'),
+              MenuItems(
+                text: 'Centros',
+                icon: Icons.forum_outlined,
+                onPressd: () => _navigateTo(Flurorouter.centrosRoute),
+                isActive:
+                    sideMenuProvider.currentPage == Flurorouter.centrosRoute,
+              ),
+              MenuItems(
+                text: 'Ubicaciones',
+                icon: Icons.forum_outlined,
+                onPressd: () => _navigateTo(Flurorouter.ubicacionesRoute),
+                isActive: sideMenuProvider.currentPage ==
+                    Flurorouter.ubicacionesRoute,
               ),
             ],
           )),

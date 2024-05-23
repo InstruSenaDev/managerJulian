@@ -13,6 +13,10 @@ class Flurorouter {
 
   static String pedidosRoute = '/dashboard/pedidos';
   static String procedimientosRoute = '/dashboard/productos';
+  static String recomendacionesRoute = '/dashboard/recomendaciones';
+  static String forosRoute = '/dashboard/foros';
+  static String centrosRoute = '/dashboard/centros';
+  static String ubicacionesRoute = '/dashboard/ubicaciones';
 
   static void configureRoutes() {
     // manejador rupas para las paginas
@@ -34,13 +38,28 @@ class Flurorouter {
         transitionType: TransitionType.fadeIn,
         transitionDuration: Duration(milliseconds: 75));
 
-    router.define(pedidosRoute,
-        handler: AdminHandlers.pedidosRoute,
+    router.define(procedimientosRoute,
+        handler: AdminHandlers.procedimientosRoute,
         transitionType: TransitionType.fadeIn,
         transitionDuration: Duration(milliseconds: 75));
 
-    router.define(procedimientosRoute,
-        handler: AdminHandlers.procedimientosRoute,
+    router.define(recomendacionesRoute,
+        handler: AdminHandlers.recomendacionesRoute,
+        transitionType: TransitionType.fadeIn,
+        transitionDuration: Duration(milliseconds: 75));
+
+    router.define(forosRoute,
+        handler: AdminHandlers.forosRoute,
+        transitionType: TransitionType.fadeIn,
+        transitionDuration: Duration(milliseconds: 75));
+
+    router.define(centrosRoute,
+        handler: AdminHandlers.centrosRoute,
+        transitionType: TransitionType.fadeIn,
+        transitionDuration: Duration(milliseconds: 75));
+
+    router.define(ubicacionesRoute,
+        handler: AdminHandlers.ubicacionesRoute,
         transitionType: TransitionType.fadeIn,
         transitionDuration: Duration(milliseconds: 75));
 

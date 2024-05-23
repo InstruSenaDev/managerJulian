@@ -5,7 +5,7 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
+    // final size = MediaQuery.of(context).size;
     return const Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
