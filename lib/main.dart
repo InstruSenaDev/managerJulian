@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:managerapp/Provider/Clientes/ClientesFromProvider.dart';
 import 'package:managerapp/Provider/Procedimientos/ProcedimientosFromProvider.dart';
 import 'package:managerapp/Provider/Procedimientos/ProcedimientosProvider.dart';
+import 'package:managerapp/Provider/Recomendaciones/RecomendacionesFromProvider.dart';
+import 'package:managerapp/Provider/Recomendaciones/RecomendacionesProvider.dart';
 import 'package:managerapp/Provider/Usuarios/UsuarioFromProvider.dart';
 import 'package:managerapp/Provider/Usuarios/UsuarioProvider.dart';
 
@@ -42,6 +44,10 @@ class AppState extends StatelessWidget {
             lazy: false, create: (_) => ProcedimientosProvider()),
         ChangeNotifierProvider(
             lazy: false, create: (_) => ProcedimientosFromProvider()),
+        ChangeNotifierProvider(
+            lazy: false, create: (_) => RecomendacionesFromProvider()),
+        ChangeNotifierProvider(
+            lazy: false, create: (_) => RecomendacionesProvider()),
       ],
       child: MyApp(),
     );

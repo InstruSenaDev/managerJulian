@@ -4,6 +4,7 @@ import 'package:managerapp/iu/views/Clientes/ClientesView.dart';
 import 'package:managerapp/iu/views/Foros/ForosView.dart';
 import 'package:managerapp/iu/views/Recomendaciones/RecomendacionesView.dart';
 import 'package:managerapp/iu/views/Procedimientos/ProcedimientosView.dart';
+import 'package:managerapp/iu/views/Ubicaciones/UbicacionesView.dart';
 import 'package:managerapp/iu/views/Usuarios/UsuarioView.dart';
 import 'package:provider/provider.dart';
 
@@ -115,7 +116,7 @@ class AdminHandlers {
     Provider.of<SideMenuProvider>(context, listen: false)
         .setCurrentPageUrl(Flurorouter.ubicacionesRoute);
     if (authProvider.authStatus == AuthStatus.authenticated)
-      return CentrosPages();
+      return UbicacionesPages();
     // return CarritoView();
     else
       return LoginView();
