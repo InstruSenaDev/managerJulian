@@ -192,7 +192,7 @@ class _RadioButtonsRowState extends State<RadioButtonsRow> {
               ),
               const Text(
                 'Pos Quirúrgico Inmediato',
-                style: TextStyle(fontSize: 16, color: Color(0xffF2326B)),
+                style: TextStyle(fontSize: 15, color: Color(0xffF2326B)),
               ),
             ],
           ),
@@ -215,7 +215,7 @@ class _RadioButtonsRowState extends State<RadioButtonsRow> {
               ),
               const Text(
                 'Pos Quirúrgico en Casa',
-                style: TextStyle(fontSize: 16, color: Color(0xff7C457E)),
+                style: TextStyle(fontSize: 15, color: Color(0xff7C457E)),
               ),
             ],
           ),

@@ -1,19 +1,223 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:managerapp/Provider/Foro/ForoProvider.dart';
+import 'package:managerapp/Provider/Recomendaciones/RecomendacionesProvider.dart';
+import 'package:provider/provider.dart';
 
-class ForosPages extends StatelessWidget {
+import '../../../inputs/customIconButton.dart';
+
+class ForosPages extends StatefulWidget {
   const ForosPages({super.key});
 
   @override
+  State<ForosPages> createState() => _ForosPagesState();
+}
+
+class _ForosPagesState extends State<ForosPages> {
+  @override
+  void initState() {
+    Provider.of<ForoProvider>(context, listen: false).getForos();
+
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    // final size = MediaQuery.of(context).size;
+    final provider = Provider.of<ForoProvider>(context);
+
+    final size = MediaQuery.of(context).size;
     return Container(
-      // color: Colors.red,
-      child: const Center(
-        child: Text(
-          'ForosPages',
-          style: TextStyle(color: Colors.black),
-        ),
+      margin: const EdgeInsets.symmetric(
+        horizontal: 30,
+        vertical: 10,
       ),
+      child: (provider.foros.isEmpty)
+          ? const SpinKitThreeBounce(
+              color: Color(0xffC81966),
+              size: 50.0,
+            )
+          : ListView(
+              children: [
+                Text(
+                  'Recomendaciones',
+                  style: GoogleFonts.roboto(
+                      fontSize: 30, fontWeight: FontWeight.w400),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                PaginatedDataTable(
+                  sortAscending: provider.ascending,
+                  sortColumnIndex: provider.sortColumnIndex,
+                  rowsPerPage: (provider.foros.isNotEmpty)
+                      ? provider.foros.length + 4
+                      : 25,
+                  actions: [
+                    CustomIconButton(
+                      width: size.width * 0.13,
+                      height: 40,
+                      colorText: Colors.white,
+                      onPressd: () {},
+                      text: 'Agregar Recomendación',
+                      color: Colors.green,
+                      icon: Icons.person_add_alt,
+                    )
+                  ],
+                  header: RadioButtonsRow(
+                    provider: provider,
+                  ),
+                  arrowHeadColor: const Color(0xff154360),
+                  columns: [
+                    DataColumn(
+                        label: const Text('Tipo',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        onSort: (colIndex, _) {
+                          provider.sortColumnIndex = colIndex;
+                          provider.sort<String>((user) => user.id!);
+                        }),
+                    // DataColumn(
+                    //     label: const Text('Descripción',
+                    //         style: TextStyle(fontWeight: FontWeight.bold)),
+                    //     onSort: (colIndex, _) {
+                    //       provider.sortColumnIndex = colIndex;
+                    //       provider.sort<String>((user) => user.id!);
+                    //     }),
+                    DataColumn(
+                        label: const Text('Procedimiento',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        onSort: (colIndex, _) {
+                          provider.sortColumnIndex = colIndex;
+                          provider.sort<String>((user) => user.id!);
+                        }),
+                    DataColumn(
+                        label: const Text('Recomendación',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        onSort: (colIndex, _) {
+                          provider.sortColumnIndex = colIndex;
+                          provider.sort<String>((user) => user.id!);
+                        }),
+                    DataColumn(
+                        label: const Text('Estado',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        onSort: (colIndex, _) {
+                          provider.sortColumnIndex = colIndex;
+                          provider.sort<String>((user) => user.id!);
+                        }),
+                    DataColumn(
+                        label: const Text('Acciones',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        onSort: (colIndex, _) {
+                          provider.sortColumnIndex = colIndex;
+                          provider.sort<String>((user) => user.id!);
+                        }),
+                  ],
+                  source: RecomendacionesDTS(
+                      provider.recomendaciones, context, provider),
+                  onPageChanged: (page) {
+                    print(page);
+                  },
+                )
+              ],
+            ),
     );
   }
 }
+
+
+class RadioButtonsRow extends StatefulWidget {
+  final RecomendacionesProvider provider;
+  const RadioButtonsRow({super.key, required this.provider});
+
+  @override
+  _RadioButtonsRowState createState() => _RadioButtonsRowState();
+}
+
+class _RadioButtonsRowState extends State<RadioButtonsRow> {
+  int? _selectedRadio = 0;
+
+  void _handleRadioValueChange(int? value) {
+    setState(() {
+      widget.provider.getRecomendaciones(value!);
+      _selectedRadio = value;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          width: 190,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+              color: const Color(0x504D53A0),
+              borderRadius: BorderRadius.circular(150)),
+          child: Row(
+            children: [
+              Radio(
+                fillColor: MaterialStateProperty.all(const Color(0xff4D53A0)),
+                value: 1,
+                groupValue: _selectedRadio,
+                onChanged: _handleRadioValueChange,
+              ),
+              const Text(
+                'Pre Quirúrgico',
+                style: TextStyle(fontSize: 15, color: Color(0xff4D53A0)),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        Container(
+          // width: 250,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+              color: const Color(0x50F2326B),
+              borderRadius: BorderRadius.circular(150)),
+          child: Row(
+            children: [
+              Radio(
+                fillColor: MaterialStateProperty.all(const Color(0xffF2326B)),
+                value: 2,
+                groupValue: _selectedRadio,
+                onChanged: _handleRadioValueChange,
+              ),
+              const Text(
+                'Pos Quirúrgico Inmediato',
+                style: TextStyle(fontSize: 15, color: Color(0xffF2326B)),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+              color: const Color(0x507C457E),
+              borderRadius: BorderRadius.circular(150)),
+          child: Row(
+            children: [
+              Radio(
+                fillColor: MaterialStateProperty.all(const Color(0xff7C457E)),
+                value: 3,
+                groupValue: _selectedRadio,
+                onChanged: _handleRadioValueChange,
+              ),
+              const Text(
+                'Pos Quirúrgico en Casa',
+                style: TextStyle(fontSize: 15, color: Color(0xff7C457E)),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+

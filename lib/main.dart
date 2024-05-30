@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:managerapp/Provider/Clientes/ClientesFromProvider.dart';
+import 'package:managerapp/Provider/Foro/ForoFromProvider.dart';
+import 'package:managerapp/Provider/Foro/ForoProvider.dart';
 import 'package:managerapp/Provider/Procedimientos/ProcedimientosFromProvider.dart';
 import 'package:managerapp/Provider/Procedimientos/ProcedimientosProvider.dart';
 import 'package:managerapp/Provider/Recomendaciones/RecomendacionesFromProvider.dart';
@@ -48,6 +50,8 @@ class AppState extends StatelessWidget {
             lazy: false, create: (_) => RecomendacionesFromProvider()),
         ChangeNotifierProvider(
             lazy: false, create: (_) => RecomendacionesProvider()),
+        ChangeNotifierProvider(lazy: false, create: (_) => ForoProvider()),
+        ChangeNotifierProvider(lazy: false, create: (_) => ForoFromProvider()),
       ],
       child: MyApp(),
     );
