@@ -22,8 +22,8 @@ class RecomendacionesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  getRecomendaciones() async {
-    String url = 'admin/web_admin_recomendaciones.php?case=1';
+  getRecomendaciones(int i) async {
+    String url = 'admin/web_admin_recomendaciones.php?case=1&date=$i';
     print(AllApi.url + url);
     final resp = await AllApi.httpGet(url);
     final dataMap = jsonDecode(resp);

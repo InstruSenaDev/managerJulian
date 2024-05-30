@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:managerapp/Provider/Procedimientos/ProcedimientosProvider.dart';
 import 'package:managerapp/Provider/Recomendaciones/RecomendacionesProvider.dart';
-
-import 'package:managerapp/modelo/Procedimientos/ProcedimientosModels.dart';
 import 'package:managerapp/modelo/Recomendaciones/RecomendacionesModels.dart';
 
 class RecomendacionesDTS extends DataTableSource {

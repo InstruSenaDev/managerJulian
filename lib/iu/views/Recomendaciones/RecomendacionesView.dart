@@ -19,7 +19,7 @@ class _RecomendacionesPagesState extends State<RecomendacionesPages> {
   @override
   void initState() {
     Provider.of<RecomendacionesProvider>(context, listen: false)
-        .getRecomendaciones();
+        .getRecomendaciones(0);
 
     super.initState();
   }
@@ -37,7 +37,7 @@ class _RecomendacionesPagesState extends State<RecomendacionesPages> {
           vertical: 10,
         ),
         child: (provider.recomendaciones.isEmpty)
-            ? SpinKitThreeBounce(
+            ? const SpinKitThreeBounce(
                 color: Color(0xffC81966),
                 size: 50.0,
               )
@@ -68,40 +68,10 @@ class _RecomendacionesPagesState extends State<RecomendacionesPages> {
                         icon: Icons.person_add_alt,
                       )
                     ],
-                    header: Row(
-                      children: [
-                        Text(
-                          // titulo de la tabla
-                          'Listado de Recomendaciones',
-                          maxLines: 2,
-                        ),
-                        SizedBox(
-                          width: 25,
-                        ),
-                        Container(
-                          width: 100,
-                          height: 45,
-                          color: Colors.red,
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Container(
-                          width: 100,
-                          height: 45,
-                          color: Colors.red,
-                        ),
-                        SizedBox(
-                          width: 15,
-                        ),
-                        Container(
-                          width: 100,
-                          height: 45,
-                          color: Colors.red,
-                        )
-                      ],
+                    header: RadioButtonsRow(
+                      provider: provider,
                     ),
-                    arrowHeadColor: Color(0xff154360),
+                    arrowHeadColor: const Color(0xff154360),
                     columns: [
                       DataColumn(
                           label: const Text('Tipo',
@@ -155,6 +125,102 @@ class _RecomendacionesPagesState extends State<RecomendacionesPages> {
                 ],
               ),
       ),
+    );
+  }
+}
+
+class RadioButtonsRow extends StatefulWidget {
+  final RecomendacionesProvider provider;
+  const RadioButtonsRow({super.key, required this.provider});
+
+  @override
+  _RadioButtonsRowState createState() => _RadioButtonsRowState();
+}
+
+class _RadioButtonsRowState extends State<RadioButtonsRow> {
+  int? _selectedRadio = 0;
+
+  void _handleRadioValueChange(int? value) {
+    setState(() {
+      widget.provider.getRecomendaciones(value!);
+      _selectedRadio = value;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      children: <Widget>[
+        Container(
+          width: 190,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+              color: const Color(0x504D53A0),
+              borderRadius: BorderRadius.circular(150)),
+          child: Row(
+            children: [
+              Radio(
+                fillColor: MaterialStateProperty.all(const Color(0xff4D53A0)),
+                value: 1,
+                groupValue: _selectedRadio,
+                onChanged: _handleRadioValueChange,
+              ),
+              const Text(
+                'Pre Quirúrgico',
+                style: TextStyle(fontSize: 15, color: Color(0xff4D53A0)),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        Container(
+          // width: 250,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+              color: const Color(0x50F2326B),
+              borderRadius: BorderRadius.circular(150)),
+          child: Row(
+            children: [
+              Radio(
+                fillColor: MaterialStateProperty.all(const Color(0xffF2326B)),
+                value: 2,
+                groupValue: _selectedRadio,
+                onChanged: _handleRadioValueChange,
+              ),
+              const Text(
+                'Pos Quirúrgico Inmediato',
+                style: TextStyle(fontSize: 16, color: Color(0xffF2326B)),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(
+          width: 20,
+        ),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+              color: const Color(0x507C457E),
+              borderRadius: BorderRadius.circular(150)),
+          child: Row(
+            children: [
+              Radio(
+                fillColor: MaterialStateProperty.all(const Color(0xff7C457E)),
+                value: 3,
+                groupValue: _selectedRadio,
+                onChanged: _handleRadioValueChange,
+              ),
+              const Text(
+                'Pos Quirúrgico en Casa',
+                style: TextStyle(fontSize: 16, color: Color(0xff7C457E)),
+              ),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
