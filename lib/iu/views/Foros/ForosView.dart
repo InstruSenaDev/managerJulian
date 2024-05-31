@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:managerapp/Provider/Foro/ForoProvider.dart';
-import 'package:managerapp/Provider/Recomendaciones/RecomendacionesProvider.dart';
 import 'package:provider/provider.dart';
 
-import '../../../inputs/customIconButton.dart';
+import 'ForosDTS.dart';
 
 class ForosPages extends StatefulWidget {
   const ForosPages({super.key});
@@ -17,7 +16,7 @@ class ForosPages extends StatefulWidget {
 class _ForosPagesState extends State<ForosPages> {
   @override
   void initState() {
-    Provider.of<ForoProvider>(context, listen: false).getForos();
+    Provider.of<ForoProvider>(context, listen: false).getForos(0);
 
     super.initState();
   }
@@ -40,7 +39,7 @@ class _ForosPagesState extends State<ForosPages> {
           : ListView(
               children: [
                 Text(
-                  'Recomendaciones',
+                  'Foros',
                   style: GoogleFonts.roboto(
                       fontSize: 30, fontWeight: FontWeight.w400),
                 ),
@@ -50,48 +49,29 @@ class _ForosPagesState extends State<ForosPages> {
                 PaginatedDataTable(
                   sortAscending: provider.ascending,
                   sortColumnIndex: provider.sortColumnIndex,
-                  rowsPerPage: (provider.foros.isNotEmpty)
-                      ? provider.foros.length + 4
-                      : 25,
-                  actions: [
-                    CustomIconButton(
-                      width: size.width * 0.13,
-                      height: 40,
-                      colorText: Colors.white,
-                      onPressd: () {},
-                      text: 'Agregar Recomendación',
-                      color: Colors.green,
-                      icon: Icons.person_add_alt,
-                    )
-                  ],
+                  rowsPerPage:
+                      (provider.foros.isNotEmpty) ? provider.foros.length : 25,
                   header: RadioButtonsRow(
                     provider: provider,
                   ),
                   arrowHeadColor: const Color(0xff154360),
                   columns: [
                     DataColumn(
-                        label: const Text('Tipo',
-                            style: TextStyle(fontWeight: FontWeight.bold)),
-                        onSort: (colIndex, _) {
-                          provider.sortColumnIndex = colIndex;
-                          provider.sort<String>((user) => user.id!);
-                        }),
-                    // DataColumn(
-                    //     label: const Text('Descripción',
-                    //         style: TextStyle(fontWeight: FontWeight.bold)),
-                    //     onSort: (colIndex, _) {
-                    //       provider.sortColumnIndex = colIndex;
-                    //       provider.sort<String>((user) => user.id!);
-                    //     }),
-                    DataColumn(
-                        label: const Text('Procedimiento',
+                        label: const Text('Titulo',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         onSort: (colIndex, _) {
                           provider.sortColumnIndex = colIndex;
                           provider.sort<String>((user) => user.id!);
                         }),
                     DataColumn(
-                        label: const Text('Recomendación',
+                        label: const Text('Nombre',
+                            style: TextStyle(fontWeight: FontWeight.bold)),
+                        onSort: (colIndex, _) {
+                          provider.sortColumnIndex = colIndex;
+                          provider.sort<String>((user) => user.id!);
+                        }),
+                    DataColumn(
+                        label: const Text('Comentario',
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         onSort: (colIndex, _) {
                           provider.sortColumnIndex = colIndex;
@@ -112,8 +92,7 @@ class _ForosPagesState extends State<ForosPages> {
                           provider.sort<String>((user) => user.id!);
                         }),
                   ],
-                  source: RecomendacionesDTS(
-                      provider.recomendaciones, context, provider),
+                  source: ForosDTS(provider.foros, context, provider),
                   onPageChanged: (page) {
                     print(page);
                   },
@@ -124,9 +103,8 @@ class _ForosPagesState extends State<ForosPages> {
   }
 }
 
-
 class RadioButtonsRow extends StatefulWidget {
-  final RecomendacionesProvider provider;
+  final ForoProvider provider;
   const RadioButtonsRow({super.key, required this.provider});
 
   @override
@@ -138,7 +116,7 @@ class _RadioButtonsRowState extends State<RadioButtonsRow> {
 
   void _handleRadioValueChange(int? value) {
     setState(() {
-      widget.provider.getRecomendaciones(value!);
+      widget.provider.getForos(value!);
       _selectedRadio = value;
     });
   }
@@ -149,22 +127,22 @@ class _RadioButtonsRowState extends State<RadioButtonsRow> {
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         Container(
-          width: 190,
+          width: 130,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
-              color: const Color(0x504D53A0),
+              color: const Color(0x503498DB),
               borderRadius: BorderRadius.circular(150)),
           child: Row(
             children: [
               Radio(
-                fillColor: MaterialStateProperty.all(const Color(0xff4D53A0)),
+                fillColor: MaterialStateProperty.all(const Color(0xff3498DB)),
                 value: 1,
                 groupValue: _selectedRadio,
                 onChanged: _handleRadioValueChange,
               ),
               const Text(
-                'Pre Quirúrgico',
-                style: TextStyle(fontSize: 15, color: Color(0xff4D53A0)),
+                'Enviado',
+                style: TextStyle(fontSize: 15, color: Color(0xff3498DB)),
               ),
             ],
           ),
@@ -173,22 +151,22 @@ class _RadioButtonsRowState extends State<RadioButtonsRow> {
           width: 20,
         ),
         Container(
-          // width: 250,
+          width: 130,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
-              color: const Color(0x50F2326B),
+              color: const Color(0x502ECC71),
               borderRadius: BorderRadius.circular(150)),
           child: Row(
             children: [
               Radio(
-                fillColor: MaterialStateProperty.all(const Color(0xffF2326B)),
+                fillColor: MaterialStateProperty.all(const Color(0xff2ECC71)),
                 value: 2,
                 groupValue: _selectedRadio,
                 onChanged: _handleRadioValueChange,
               ),
               const Text(
-                'Pos Quirúrgico Inmediato',
-                style: TextStyle(fontSize: 15, color: Color(0xffF2326B)),
+                'Aprovado',
+                style: TextStyle(fontSize: 15, color: Color(0xff2ECC71)),
               ),
             ],
           ),
@@ -197,21 +175,22 @@ class _RadioButtonsRowState extends State<RadioButtonsRow> {
           width: 20,
         ),
         Container(
+          width: 130,
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
-              color: const Color(0x507C457E),
+              color: const Color(0x50E74C3C),
               borderRadius: BorderRadius.circular(150)),
           child: Row(
             children: [
               Radio(
-                fillColor: MaterialStateProperty.all(const Color(0xff7C457E)),
+                fillColor: MaterialStateProperty.all(const Color(0xffE74C3C)),
                 value: 3,
                 groupValue: _selectedRadio,
                 onChanged: _handleRadioValueChange,
               ),
               const Text(
-                'Pos Quirúrgico en Casa',
-                style: TextStyle(fontSize: 15, color: Color(0xff7C457E)),
+                'Rechazado',
+                style: TextStyle(fontSize: 15, color: Color(0xffE74C3C)),
               ),
             ],
           ),
@@ -220,4 +199,3 @@ class _RadioButtonsRowState extends State<RadioButtonsRow> {
     );
   }
 }
-

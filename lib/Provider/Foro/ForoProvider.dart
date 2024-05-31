@@ -22,8 +22,8 @@ class ForoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  getForos() async {
-    String url = 'admin/web_admin_foro.php?case=1';
+  getForos(int i) async {
+    String url = 'admin/web_admin_foro.php?case=1&date=$i';
     print(AllApi.url + url);
     final resp = await AllApi.httpGet(url);
     final dataMap = jsonDecode(resp);

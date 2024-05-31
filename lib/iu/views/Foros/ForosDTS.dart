@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:managerapp/Provider/Foro/ForoProvider.dart';
-import 'package:managerapp/Provider/Recomendaciones/RecomendacionesProvider.dart';
-import 'package:managerapp/modelo/Recomendaciones/RecomendacionesModels.dart';
 
 import '../../../modelo/Foros/ForosModels.dart';
 
@@ -22,9 +20,15 @@ class ForosDTS extends DataTableSource {
     final size = MediaQuery.of(context).size;
 
     return DataRow.byIndex(index: index, cells: [
-      DataCell(Text(foro.titulo!)),
       DataCell(Container(
-          width: size.width * 0.3,
+          width: size.width * 0.1,
+          child: Text(
+            overflow: TextOverflow.ellipsis,
+            foro.titulo!,
+            maxLines: 2,
+          ))),
+      DataCell(Container(
+          width: size.width * 0.1,
           child: Text(
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -34,7 +38,7 @@ class ForosDTS extends DataTableSource {
           child: Text(
               maxLines: 2, overflow: TextOverflow.ellipsis, foro.comentario!))),
       DataCell(Container(
-        width: 80,
+        width: 100,
         padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 2),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(150),
