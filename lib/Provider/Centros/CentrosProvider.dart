@@ -5,11 +5,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 
 import '../../api/AllApi.dart';
-import '../../modelo/Foros/ForosModels.dart';
+import '../../modelo/Centros/CentrosModels.dart';
 
-class ForoProvider extends ChangeNotifier {
-  List<Foro> foros = [];
-  late Foro isSelectUsuarios;
+class CentrosProvider extends ChangeNotifier {
+  List<Centro> centro = [];
+  late Centro isSelectCentros;
   String idVendedorSelect = '0';
   String nameVendedorSelect = 'Vendedor';
 
@@ -22,19 +22,15 @@ class ForoProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  getForos(int i) async {
-    int date = i;
-    // if (date == 4) {
-    //   date = 0;
-    // }
-    String url = 'admin/web_admin_foro.php?case=1&date=$date';
+  getCentros() async {
+    String url = 'admin/web_admin_centros.php?case=1';
     print(AllApi.url + url);
     final resp = await AllApi.httpGet(url);
     final dataMap = jsonDecode(resp);
-    final Foros foros = Foros.fromlist(dataMap['rpta']);
+    final Centros centro = Centros.fromlist(dataMap['rpta']);
     print(resp);
-    if (foros.dato.isNotEmpty) {
-      this.foros = foros.dato;
+    if (centro.dato.isNotEmpty) {
+      this.centro = centro.dato;
     }
     notifyListeners();
   }
@@ -109,8 +105,8 @@ class ForoProvider extends ChangeNotifier {
   // //   notifyListeners();
   // // }
 
-  void sort<T>(Comparable<T> Function(Foro user) getField) {
-    foros.sort((a, b) {
+  void sort<T>(Comparable<T> Function(Centro user) getField) {
+    centro.sort((a, b) {
       final aValue = getField(a);
       final bValue = getField(b);
 

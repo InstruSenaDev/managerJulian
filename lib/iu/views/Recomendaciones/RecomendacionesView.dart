@@ -220,6 +220,30 @@ class _RadioButtonsRowState extends State<RadioButtonsRow> {
             ],
           ),
         ),
+        const SizedBox(
+          width: 20,
+        ),
+        Container(
+          width: 130,
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(150)),
+          child: Row(
+            children: [
+              Radio(
+                fillColor: MaterialStateProperty.all(Colors.grey),
+                value: 0,
+                groupValue: _selectedRadio,
+                onChanged: _handleRadioValueChange,
+              ),
+              Text(
+                'Ver Todo',
+                style: TextStyle(fontSize: 15, color: Colors.grey),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
