@@ -42,7 +42,7 @@ class _CentrosPagesState extends State<CentrosPages> {
             : ListView(
                 children: [
                   Text(
-                    'centros',
+                    'Centros',
                     style: GoogleFonts.roboto(
                         fontSize: 30, fontWeight: FontWeight.w400),
                   ),
@@ -61,7 +61,7 @@ class _CentrosPagesState extends State<CentrosPages> {
                         height: 40,
                         colorText: Colors.white,
                         onPressd: () {},
-                        text: 'Agregar Usuario',
+                        text: 'Agregar Centro',
                         color: Colors.green,
                         icon: Icons.person_add_alt,
                       )
