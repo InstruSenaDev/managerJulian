@@ -64,7 +64,7 @@ class CentrosDTS extends DataTableSource {
             ),
             Text(centro.estado!,
                 style: TextStyle(
-                    fontSize: 13,
+                    fontSize: 13,sssss
                     color: Color(int.parse("0xff${centro.colorEstado}"))))
           ],
         ),
