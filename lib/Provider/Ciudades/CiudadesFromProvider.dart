@@ -2,18 +2,21 @@
 
 import 'package:flutter/cupertino.dart';
 
-class ClientesFromProvider extends ChangeNotifier {
+class CiudadesFromProvider extends ChangeNotifier {
   GlobalKey<FormState> fromkey = GlobalKey<FormState>();
 
   String id = '';
-  String nombre = '';
-  String apellido = '';
-  String tipoDocumento = '';
   String documento = '';
-  String correo = '';
+  String nombre = '';
+  String direccion = '';
+  String telefono = '';
   String celular = '';
   String ciudad = '';
-  String pin = '';
+  String departamento = '';
+  String correo = '';
+  String correofactura = '';
+  String idvendedor = '';
+  String contrasena = '';
   String rol = '';
   String estado = '';
 
@@ -30,8 +33,11 @@ class ClientesFromProvider extends ChangeNotifier {
 
   validateNull() {
     if (nombre.isNotEmpty ||
+        direccion.isNotEmpty ||
+        telefono.isNotEmpty ||
         celular.isNotEmpty ||
         ciudad.isNotEmpty ||
+        departamento.isNotEmpty ||
         correo.isNotEmpty ||
         rol.isNotEmpty ||
         estado.isNotEmpty) {

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:managerapp/Provider/Centros/CentrosFromProvider.dart';
 import 'package:managerapp/Provider/Centros/CentrosProvider.dart';
+import 'package:managerapp/Provider/Ciudades/CiudadesFromProvider.dart';
+import 'package:managerapp/Provider/Ciudades/CiudadesProvider.dart';
 import 'package:managerapp/Provider/Clientes/ClientesFromProvider.dart';
 import 'package:managerapp/Provider/Foro/ForoFromProvider.dart';
 import 'package:managerapp/Provider/Foro/ForoProvider.dart';
@@ -57,6 +59,9 @@ class AppState extends StatelessWidget {
         ChangeNotifierProvider(lazy: false, create: (_) => CentrosProvider()),
         ChangeNotifierProvider(
             lazy: false, create: (_) => CentrosFromProvider()),
+        ChangeNotifierProvider(lazy: false, create: (_) => CiudadesProvider()),
+        ChangeNotifierProvider(
+            lazy: false, create: (_) => CiudadesFromProvider()),
       ],
       child: MyApp(),
     );

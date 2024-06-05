@@ -103,6 +103,13 @@ class Siderbar extends StatelessWidget {
                 isActive: sideMenuProvider.currentPage ==
                     Flurorouter.ubicacionesRoute,
               ),
+              MenuItems(
+                text: 'Ciudades',
+                icon: Icons.location_city_outlined,
+                onPressd: () => _navigateTo(Flurorouter.ciudadesRoute),
+                isActive:
+                    sideMenuProvider.currentPage == Flurorouter.ciudadesRoute,
+              ),
             ],
           )),
     );

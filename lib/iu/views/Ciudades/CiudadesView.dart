@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:managerapp/Provider/Ciudades/CiudadesProvider.dart';
 import 'package:managerapp/Provider/Clientes/ClientesProvider.dart';
 import 'package:managerapp/iu/views/Clientes/ClientesDTS.dart';
 import 'package:provider/provider.dart';
 
 import '../../../inputs/customIconButton.dart';
-import '../../../routes/router.dart';
-import '../../../services/navigationService.dart';
+import 'CiudadesDTS.dart';
 
-class ClientesView extends StatefulWidget {
-  const ClientesView({super.key});
+class CiudadesView extends StatefulWidget {
+  const CiudadesView({super.key});
 
   @override
-  State<ClientesView> createState() => _ClientesViewState();
+  State<CiudadesView> createState() => _CiudadesViewState();
 }
 
-class _ClientesViewState extends State<ClientesView> {
+class _CiudadesViewState extends State<CiudadesView> {
   @override
   void initState() {
-    Provider.of<ClienteProvider>(context, listen: false).getUsuarios();
+    Provider.of<CiudadesProvider>(context, listen: false).getCiudades();
 
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final usuarios = Provider.of<ClienteProvider>(context);
+    final ciudades = Provider.of<CiudadesProvider>(context);
     // int _rowsPerPage = PaginatedDataTable.defaultRowsPerPage;
     final size = MediaQuery.of(context).size;
     return Container(
@@ -36,7 +36,7 @@ class _ClientesViewState extends State<ClientesView> {
           horizontal: 30,
           vertical: 10,
         ),
-        child: (usuarios.usuarios.isEmpty)
+        child: (ciudades.ciudades.isEmpty)
             ? SpinKitThreeBounce(
                 color: Color(0xffC81966),
                 size: 50.0,
@@ -44,7 +44,7 @@ class _ClientesViewState extends State<ClientesView> {
             : ListView(
                 children: [
                   Text(
-                    'Usuarios',
+                    'Ciudades',
                     style: GoogleFonts.roboto(
                         fontSize: 30, fontWeight: FontWeight.w400),
                   ),
@@ -52,76 +52,59 @@ class _ClientesViewState extends State<ClientesView> {
                     height: 10,
                   ),
                   PaginatedDataTable(
-                    sortAscending: usuarios.ascending,
-                    sortColumnIndex: usuarios.sortColumnIndex,
-                    rowsPerPage: (usuarios.usuarios.isNotEmpty)
-                        ? usuarios.usuarios.length + 4
+                    sortAscending: ciudades.ascending,
+                    sortColumnIndex: ciudades.sortColumnIndex,
+                    rowsPerPage: (ciudades.ciudades.isNotEmpty)
+                        ? ciudades.ciudades.length + 4
                         : 25,
                     actions: [
                       CustomIconButton(
                         width: size.width * 0.1,
                         height: 40,
                         colorText: Colors.white,
-                        onPressd: () {
-                          NavigationService.navigateTo(
-                              Flurorouter.nuevoClienteRoute);
-                        },
-                        text: 'Agregar Usuario',
+                        onPressd: () {},
+                        text: 'Agregar ciudad',
                         color: Colors.green,
-                        icon: Icons.person_add_alt,
+                        icon: Icons.location_city_outlined,
                       )
                     ],
                     header: const Text(
                       // titulo de la tabla
-                      'Listado de Usuarios',
+                      'Listado de Ciudades',
                       maxLines: 2,
                     ),
                     arrowHeadColor: Color(0xff154360),
                     columns: [
                       DataColumn(
-                          label: const Text('Nombre',
+                          label: const Text('Ciudad',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           onSort: (colIndex, _) {
-                            usuarios.sortColumnIndex = colIndex;
-                            usuarios.sort<String>((user) => user.id!);
+                            ciudades.sortColumnIndex = colIndex;
+                            ciudades.sort<String>((user) => user.id!);
                           }),
                       DataColumn(
-                          label: const Text('Ducumento',
+                          label: const Text('Pais',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           onSort: (colIndex, _) {
-                            usuarios.sortColumnIndex = colIndex;
-                            usuarios.sort<String>((user) => user.id!);
-                          }),
-                      DataColumn(
-                          label: const Text('Correo',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          onSort: (colIndex, _) {
-                            usuarios.sortColumnIndex = colIndex;
-                            usuarios.sort<String>((user) => user.id!);
-                          }),
-                      DataColumn(
-                          label: const Text('Celular',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          onSort: (colIndex, _) {
-                            usuarios.sortColumnIndex = colIndex;
-                            usuarios.sort<String>((user) => user.id!);
-                          }),
-                      DataColumn(
-                          label: const Text('Rol',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
-                          onSort: (colIndex, _) {
-                            usuarios.sortColumnIndex = colIndex;
-                            usuarios.sort<String>((user) => user.id!);
+                            ciudades.sortColumnIndex = colIndex;
+                            ciudades.sort<String>((user) => user.id!);
                           }),
                       DataColumn(
                           label: const Text('Estado',
                               style: TextStyle(fontWeight: FontWeight.bold)),
                           onSort: (colIndex, _) {
-                            usuarios.sortColumnIndex = colIndex;
-                            usuarios.sort<String>((user) => user.id!);
+                            ciudades.sortColumnIndex = colIndex;
+                            ciudades.sort<String>((user) => user.id!);
+                          }),
+                      DataColumn(
+                          label: const Text('Acciones',
+                              style: TextStyle(fontWeight: FontWeight.bold)),
+                          onSort: (colIndex, _) {
+                            ciudades.sortColumnIndex = colIndex;
+                            ciudades.sort<String>((user) => user.id!);
                           }),
                     ],
-                    source: ClienteDTS(usuarios.usuarios, context, usuarios),
+                    source: CiudadesDTS(ciudades.ciudades, context, ciudades),
                     onPageChanged: (page) {
                       print(page);
                     },

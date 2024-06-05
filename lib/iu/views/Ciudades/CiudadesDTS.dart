@@ -1,31 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:managerapp/Provider/Ciudades/CiudadesProvider.dart';
 import 'package:managerapp/Provider/Clientes/ClientesProvider.dart';
 
 import 'package:managerapp/modelo/Usuarios/UsuariosModels.dart';
 
-class ClienteDTS extends DataTableSource {
-  final List<Usuario> usuarios;
-  final BuildContext context;
-  final ClienteProvider provider;
+import '../../../modelo/Ciudades/CiudadesModels.dart';
 
-  ClienteDTS(this.usuarios, this.context, this.provider);
+class CiudadesDTS extends DataTableSource {
+  final List<Ciudad> ciudades;
+  final BuildContext context;
+  final CiudadesProvider provider;
+
+  CiudadesDTS(this.ciudades, this.context, this.provider);
 
   @override
   DataRow getRow(int index) {
-    final usuario = usuarios[index];
+    final ciudad = ciudades[index];
 
     return DataRow.byIndex(index: index, cells: [
-      DataCell(Text('${usuario.nombres!} ${usuario.apellidos}')),
-      DataCell(Text(usuario.documento!)),
-      DataCell(Text(usuario.correo!)),
-      DataCell(Text(usuario.celular!)),
-      DataCell(Text(usuario.rolname!)),
+      DataCell(Text(ciudad.ciudad!)),
+      DataCell(Text(ciudad.pais!)),
       DataCell(Container(
         width: 80,
         padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(150),
-            color: Color(int.parse("0x50${usuario.colorEstado}"))),
+            color: Color(int.parse("0x50${ciudad.color}"))),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
@@ -34,18 +34,33 @@ class ClienteDTS extends DataTableSource {
               width: 10,
               height: 10,
               decoration: BoxDecoration(
-                  color: Color(int.parse("0xff${usuario.colorEstado}")),
+                  color: Color(int.parse("0xff${ciudad.color}")),
                   borderRadius: BorderRadius.circular(150)),
             ),
             SizedBox(
               width: 10,
             ),
-            Text(usuario.esta!,
+            Text(ciudad.estado!,
                 style: TextStyle(
                     fontSize: 13,
-                    color: Color(int.parse("0xff${usuario.colorEstado}"))))
+                    color: Color(int.parse("0xff${ciudad.color}")))),
           ],
         ),
+      )),
+      const DataCell(Row(
+        children: [
+          Icon(
+            Icons.remove_red_eye_outlined,
+            color: Colors.blue,
+          ),
+          SizedBox(
+            width: 20,
+          ),
+          Icon(
+            Icons.delete_outline_rounded,
+            color: Colors.red,
+          )
+        ],
       )),
     ]);
   }
@@ -54,7 +69,7 @@ class ClienteDTS extends DataTableSource {
   bool get isRowCountApproximate => false;
 
   @override
-  int get rowCount => usuarios.length;
+  int get rowCount => ciudades.length;
 
   @override
   int get selectedRowCount => 0;

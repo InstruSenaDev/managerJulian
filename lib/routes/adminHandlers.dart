@@ -1,6 +1,8 @@
 import 'package:fluro/fluro.dart';
 import 'package:managerapp/iu/views/Centros/CentrosView.dart';
+import 'package:managerapp/iu/views/Ciudades/CiudadesView.dart';
 import 'package:managerapp/iu/views/Clientes/ClientesView.dart';
+import 'package:managerapp/iu/views/Clientes/NuevoCliente.dart';
 import 'package:managerapp/iu/views/Foros/ForosView.dart';
 import 'package:managerapp/iu/views/Recomendaciones/RecomendacionesView.dart';
 import 'package:managerapp/iu/views/Procedimientos/ProcedimientosView.dart';
@@ -51,6 +53,7 @@ class AdminHandlers {
     }
   });
 
+  // ************* Clientes **********************
   static Handler clientesRoute = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
     Provider.of<SideMenuProvider>(context, listen: false)
@@ -63,6 +66,21 @@ class AdminHandlers {
     }
   });
 
+  static Handler nuevoClienteRoute = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.nuevoClienteRoute);
+
+    if (authProvider.authStatus == AuthStatus.authenticated) {
+      return const NuevoCliente();
+    } else {
+      return const LoginView();
+    }
+  });
+  // ************* Fin Clientes **********************
+
+
+  
   static Handler procedimientosRoute = Handler(handlerFunc: (context, params) {
     final authProvider = Provider.of<AuthProvider>(context!);
     Provider.of<SideMenuProvider>(context, listen: false)
@@ -117,6 +135,17 @@ class AdminHandlers {
         .setCurrentPageUrl(Flurorouter.ubicacionesRoute);
     if (authProvider.authStatus == AuthStatus.authenticated)
       return UbicacionesPages();
+    // return CarritoView();
+    else
+      return LoginView();
+  });
+
+  static Handler ciudadesRoute = Handler(handlerFunc: (context, params) {
+    final authProvider = Provider.of<AuthProvider>(context!);
+    Provider.of<SideMenuProvider>(context, listen: false)
+        .setCurrentPageUrl(Flurorouter.ciudadesRoute);
+    if (authProvider.authStatus == AuthStatus.authenticated)
+      return CiudadesView();
     // return CarritoView();
     else
       return LoginView();
