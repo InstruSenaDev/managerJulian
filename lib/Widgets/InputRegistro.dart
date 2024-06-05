@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:managerapp/Provider/Clientes/ClientesFromProvider.dart';
 
 import '../Provider/Usuarios/UsuarioFromProvider.dart';
 
 class InputRegistro {
   static inputNombre(String textLabel, String textExample, IconData icon,
-      BuildContext context, UsuariosFromProvider provider, TextInputType name) {
+      BuildContext context, ClientesFromProvider provider, TextInputType name) {
     return Container(
       margin: const EdgeInsets.only(bottom: 6),
       child: Column(
@@ -32,7 +33,7 @@ class InputRegistro {
                 Expanded(
                   child: TextField(
                     keyboardType: name,
-                    onChanged: (value) => provider.nombre = value.trim(),
+                    onChanged: (value) => provider.apellido = value.trim(),
                     decoration: decorationInput(textLabel),
                     style: TextStyle(
                       color: Color(0xff718EBF),
@@ -53,7 +54,7 @@ class InputRegistro {
       String textExample,
       IconData icon,
       BuildContext context,
-      UsuariosFromProvider provider,
+      ClientesFromProvider provider,
       TextInputType number) {
     return Container(
       margin: const EdgeInsets.only(bottom: 6),
@@ -102,7 +103,7 @@ class InputRegistro {
       String textExample,
       IconData icon,
       BuildContext context,
-      UsuariosFromProvider provider,
+      ClientesFromProvider provider,
       TextInputType phone) {
     return Container(
       margin: const EdgeInsets.only(bottom: 6),
@@ -151,7 +152,7 @@ class InputRegistro {
       String textExample,
       IconData icon,
       BuildContext context,
-      UsuariosFromProvider provider,
+      ClientesFromProvider provider,
       TextInputType emailAddress) {
     return Container(
       margin: const EdgeInsets.only(bottom: 6),
@@ -195,54 +196,54 @@ class InputRegistro {
     );
   }
 
-  static inputDireccion(
-      String textLabel,
-      String textExample,
-      IconData icon,
-      BuildContext context,
-      UsuariosFromProvider provider,
-      TextInputType emailAddress) {
-    return Container(
-      margin: const EdgeInsets.only(bottom: 6),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Container(
-            margin: const EdgeInsets.only(top: 2),
-            decoration: BoxDecoration(
-              // color: Colors.blue,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(
-                color: const Color(0xffbf001e),
-              ),
-            ),
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: Icon(
-                    icon,
-                    color: const Color(0xffbf001e),
-                  ),
-                ),
-                Expanded(
-                  child: TextField(
-                    keyboardType: emailAddress,
-                    onChanged: (value) => provider.direccion = value.trim(),
-                    decoration: decorationInput(textLabel),
-                    style: TextStyle(
-                      color: Colors.grey[900],
-                    ),
-                    cursorColor: const Color(0xffbf001e),
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
+  // static inputDireccion(
+  //     String textLabel,
+  //     String textExample,
+  //     IconData icon,
+  //     BuildContext context,
+  //     ClientesFromProvider provider,
+  //     TextInputType emailAddress) {
+  //   return Container(
+  //     margin: const EdgeInsets.only(bottom: 6),
+  //     child: Column(
+  //       crossAxisAlignment: CrossAxisAlignment.start,
+  //       children: [
+  //         Container(
+  //           margin: const EdgeInsets.only(top: 2),
+  //           decoration: BoxDecoration(
+  //             // color: Colors.blue,
+  //             borderRadius: BorderRadius.circular(8),
+  //             border: Border.all(
+  //               color: const Color(0xffbf001e),
+  //             ),
+  //           ),
+  //           child: Row(
+  //             children: [
+  //               Padding(
+  //                 padding: const EdgeInsets.all(5),
+  //                 child: Icon(
+  //                   icon,
+  //                   color: const Color(0xffbf001e),
+  //                 ),
+  //               ),
+  //               Expanded(
+  //                 child: TextField(
+  //                   keyboardType: emailAddress,
+  //                   onChanged: (value) => provider.direccion = value.trim(),
+  //                   decoration: decorationInput(textLabel),
+  //                   style: TextStyle(
+  //                     color: Colors.grey[900],
+  //                   ),
+  //                   cursorColor: const Color(0xffbf001e),
+  //                 ),
+  //               ),
+  //             ],
+  //           ),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   static inputPassword(
       String textLabel,

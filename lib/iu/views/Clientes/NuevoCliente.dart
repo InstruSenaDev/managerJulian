@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -6,6 +8,7 @@ import '../../../Provider/Clientes/ClientesFromProvider.dart';
 import '../../../Provider/Clientes/ClientesProvider.dart';
 import '../../../Provider/Usuarios/UsuarioFromProvider.dart';
 import '../../../Widgets/InputRegistro.dart';
+import '../../../inputs/customIconButton.dart';
 
 class NuevoCliente extends StatefulWidget {
   const NuevoCliente({super.key});
@@ -25,7 +28,7 @@ class _NuevoClienteState extends State<NuevoCliente> {
 
   @override
   Widget build(BuildContext context) {
-    final fromProvider = Provider.of<UsuariosFromProvider>(context);
+    final fromProvider = Provider.of<ClientesFromProvider>(context);
     final provider = Provider.of<ClienteProvider>(context);
 
     final size = MediaQuery.of(context).size;
@@ -100,11 +103,51 @@ class _NuevoClienteState extends State<NuevoCliente> {
             ),
             Ciudad(
               provider: provider,
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: size.width * 0.185),
+              child: CustomIconButton(
+                  width: size.width * 0.1,
+                  height: 40,
+                  colorText: Colors.white,
+                  onPressd: () {
+                    fromProvider.pin = generarCodigo();
+
+                    if (fromProvider.validateNull()) {
+                      provider.getNewUsuarios(fromProvider, context);
+                    }
+                  },
+                  text: 'Guardar',
+                  color: Colors.green,
+                  icon: Icons.add),
             )
           ],
         ),
       ),
     );
+  }
+
+  String generarCodigo() {
+    // Generar letras aleatorias
+    String letras = '';
+    var random = Random();
+    for (int i = 0; i < 3; i++) {
+      letras += String.fromCharCode(random.nextInt(26) + 65);
+    }
+
+    // Generar números aleatorios
+    String numeros = '';
+    for (int i = 0; i < 3; i++) {
+      numeros += random.nextInt(10).toString();
+    }
+
+    // Mezclar letras y números
+    var codigo = letras + numeros;
+
+    return codigo;
   }
 }
 
@@ -329,7 +372,7 @@ class Ciudad extends StatelessWidget {
                                   onTap: () {
                                     // provider.progress();
 
-                                    fromProvider.tipoDocumento = e.id!;
+                                    fromProvider.ciudad = e.id!;
 
                                     provider.asignaDateCiudades(
                                         e.id!, e.ciudad!);

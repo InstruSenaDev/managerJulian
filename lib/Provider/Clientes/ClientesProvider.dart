@@ -92,17 +92,33 @@ class ClienteProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+
+// $nombres=$_GET["nombres"];
+// $apellidos=$_GET["apellidos"];
+// $tipoDocumento=$_GET["tipoDocumento"];
+// $documento=$_GET["documento"];
+// $correo=$_GET["correo"];
+// $celular=$_GET["celular"];
+// $ciudad=$_GET["ciudad"];
+// $pin=$_GET["pin"];
+// $rol=$_GET["rol"];
+// $estado=$_GET["estado"];
+
+
   getNewUsuarios(
       ClientesFromProvider fromProvider, BuildContext context) async {
-    String documento = fromProvider.documento;
     String nombre = fromProvider.nombre;
-
+    String apellido = fromProvider.apellido;
+    String tipoDocumento = fromProvider.tipoDocumento;
+    String documento = fromProvider.documento;
+    String correo = fromProvider.correo;
     String celular = fromProvider.celular;
     String ciudad = fromProvider.ciudad;
-
-    String correo = fromProvider.correo;
+    String pin = fromProvider.pin;
     String rol = fromProvider.rol;
     String estado = fromProvider.estado;
+
+
 
     var contra1 = DBCrypt().hashpw(documento, DBCrypt().gensalt());
 
